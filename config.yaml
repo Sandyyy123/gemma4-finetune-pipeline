@@ -1,0 +1,35 @@
+model:
+  # Standard Gemma4: google/gemma-4-9b-it  |  google/gemma-4-27b-it
+  # NVFP4 variant:   add "nvfp4" or "nf4" to name, or set quantization.load_in_4bit: true
+  name: google/gemma-4-9b-it
+
+quantization:
+  load_in_4bit: true       # set false for standard bfloat16 (requires ~40GB+ VRAM)
+  double_quant:  true
+
+lora:
+  enabled:        true
+  r:              16
+  alpha:          32
+  dropout:        0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+
+data:
+  train_file: data/dummy_train.jsonl
+  eval_file:  null              # set to a val .jsonl to enable eval + debug callback
+
+training:
+  use_thinking:          false  # true = supervise thinking steps; false = answer only
+  supervise_stop_tokens: false  # true = include <think>/<end_of_turn> tokens in loss
+  max_length:            2048
+  output_dir:            ./output
+  epochs:                3
+  batch_size:            2
+  grad_accum:            4
+  lr:                    2.0e-4
+  warmup_ratio:          0.05
+  lr_scheduler:          cosine
+  logging_steps:         10
+  save_steps:            100
+  eval_steps:            50
+  report_to:             none   # tensorboard | wandb | none

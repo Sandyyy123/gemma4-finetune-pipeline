@@ -1,0 +1,19 @@
+# RunPod pod template for Gemma4 finetuning
+# Recommended: 1x A100-80GB (or 2x A40 for 27B)
+
+name: gemma4-finetune
+image: runpod/pytorch:2.3.0-py3.11-cuda12.1.1-devel
+gpu_type_id: NVIDIA A100 80GB PCIe
+gpu_count: 1
+container_disk_in_gb: 50
+volume_in_gb: 100
+ports: "8888/http"   # JupyterLab
+
+env:
+  HF_TOKEN:     "<your_huggingface_token>"
+  WANDB_API_KEY: ""
+
+start_script: |
+  pip install -r /workspace/gemma4-finetune-pipeline/requirements.txt
+  cd /workspace/gemma4-finetune-pipeline
+  python src/train.py --config config.yaml --debug_eval
