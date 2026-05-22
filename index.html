@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Gemma4 Fine-Tune Pipeline — Sandeep Grover</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -42,81 +41,32 @@ footer{text-align:center;padding:32px;color:var(--muted);font-size:.82rem;border
 </style>
 </head>
 <body>
-
 <nav>
   <a href="https://sandyyy123.github.io" class="nav-back">← Portfolio</a>
   <span class="nav-title">Gemma4 Fine-Tune Pipeline</span>
   <a href="https://github.com/Sandyyy123/gemma4-finetune-pipeline" target="_blank" class="nav-back" style="margin-left:auto">GitHub ↗</a>
 </nav>
-
 <div class="hero">
   <h1>Gemma4 Fine-Tune Pipeline</h1>
   <p>SFT pipeline for Gemma4: per-token thinking-channel loss masking, QLoRA, cloud deployment scripts for RunPod / Vast.ai / UpCloud. Debug evaluation for chain-of-thought.</p>
   <div class="badges"><span class="badge">Gemma4</span> <span class="badge">QLoRA</span> <span class="badge">SFTTrainer</span> <span class="badge">RunPod</span></div>
   <div class="metric-bar">✦ Thinking-channel supervision · cloud deploy scripts</div>
 </div>
-
 <div class="card">
   <div class="section-title">Interactive Demo</div>
   <div class="highlight">Gemma4 | Per-token thinking-channel masking | QLoRA | RunPod</div>
   <p style="font-size:.82rem;color:#94a3b8;margin-bottom:16px">Training Loss: Standard vs Thinking-Channel SFT</p>
-  <div class="demo-container">
-<canvas id="myChart"></canvas>
-<script>
-new Chart(document.getElementById('myChart'), {
-  type: 'line',
-  data: {
-    labels: ["Step 100", "Step 200", "Step 300", "Step 400", "Step 500", "Step 600", "Step 700", "Step 800", "Step 900", "Step 1000"],
-    datasets: [
-      {
-        label: 'Thinking-Channel SFT',
-        data: [2.41, 1.98, 1.67, 1.43, 1.27, 1.14, 1.04, 0.97, 0.91, 0.87],
-        borderColor: 'rgba(99,102,241,0.9)',
-        backgroundColor: 'rgba(99,102,241,0.08)',
-        fill: true,
-        tension: 0.35,
-        pointRadius: 3,
-        borderWidth: 2.5
-      },
-      {
-        label: 'Standard SFT',
-        data: [2.39, 2.01, 1.74, 1.52, 1.38, 1.28, 1.2, 1.14, 1.09, 1.05],
-        borderColor: 'rgba(148,163,184,0.55)',
-        backgroundColor: 'transparent',
-        borderDash: [5,4],
-        tension: 0.35,
-        pointRadius: 2,
-        borderWidth: 1.5
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    interaction: { intersect: false, mode: 'index' },
-    plugins: {
-      legend: { labels: { color: '#94a3b8', font: { size: 12 } } },
-      tooltip: { backgroundColor: 'rgba(15,17,32,0.95)', borderColor: 'rgba(99,102,241,0.3)', borderWidth: 1 }
-    },
-    scales: {
-      y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
-      x: { grid: { display: false }, ticks: { color: '#94a3b8', maxTicksLimit: 12 } }
-    }
-  }
-});
-</script></div>
+  <div class="demo-container"><canvas id="myChart"></canvas><script>
+new Chart(document.getElementById('myChart'),{type:'line',data:{labels:["Step 100", "Step 200", "Step 300", "Step 400", "Step 500", "Step 600", "Step 700", "Step 800", "Step 900", "Step 1000"],datasets:[{label:'Thinking-Channel SFT',data:[2.41, 1.98, 1.67, 1.43, 1.27, 1.14, 1.04, 0.97, 0.91, 0.87],borderColor:'rgba(99,102,241,0.9)',backgroundColor:'rgba(99,102,241,0.08)',fill:true,tension:0.35,pointRadius:3,borderWidth:2.5},{label:'Standard SFT',data:[2.39, 2.01, 1.74, 1.52, 1.38, 1.28, 1.2, 1.14, 1.09, 1.05],borderColor:'rgba(148,163,184,0.55)',backgroundColor:'transparent',borderDash:[5,4],tension:0.35,pointRadius:2,borderWidth:1.5}]},options:{responsive:true,interaction:{intersect:false,mode:'index'},plugins:{legend:{labels:{color:'#94a3b8'}},tooltip:{backgroundColor:'rgba(15,17,32,0.95)',borderColor:'rgba(99,102,241,0.3)',borderWidth:1}},scales:{y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#94a3b8'}},x:{grid:{display:false},ticks:{color:'#94a3b8',maxTicksLimit:10}}}}});</script></div>
   <div class="stats-grid"><div class="stat-box"><span class="stat-value">Gemma4 27B</span><span class="stat-label">Model</span></div><div class="stat-box"><span class="stat-value">QLoRA + SFT</span><span class="stat-label">Method</span></div><div class="stat-box"><span class="stat-value">A100 40GB</span><span class="stat-label">GPU</span></div><div class="stat-box"><span class="stat-value">1,000</span><span class="stat-label">Training Steps</span></div></div>
 </div>
-
 <div class="card">
   <div class="section-title">Tech Stack</div>
   <div class="badges" style="margin-bottom:0"><span class="badge">Gemma4</span> <span class="badge">QLoRA</span> <span class="badge">SFTTrainer</span> <span class="badge">RunPod</span></div>
 </div>
-
 <footer>
-  <p>Built by <a href="https://sandyyy123.github.io">Sandeep Grover</a> ·
-     <a href="https://github.com/Sandyyy123/gemma4-finetune-pipeline" target="_blank">GitHub Repo</a> ·
-     <a href="https://linkedin.com/in/sandeep-grover-b3192a16" target="_blank">LinkedIn</a></p>
+  <p>Built by <a href="https://sandyyy123.github.io">Sandeep Grover</a> &nbsp;·&nbsp;
+     <a href="https://github.com/Sandyyy123/gemma4-finetune-pipeline" target="_blank">View on GitHub</a></p>
 </footer>
-
 </body>
 </html>
